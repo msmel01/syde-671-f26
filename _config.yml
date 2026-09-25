@@ -1,0 +1,29 @@
+title: SYDE 671 Projects
+description: Write-ups of my SYDE 671 assignments.
+author: msmel01
+
+# Must match the GitHub repo name, since Pages serves it at username.github.io/<repo>/
+baseurl: "/syde-671-f26"
+url: "https://msmel01.github.io"
+
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
+
+# Each assignment is a Markdown file in the _assignments folder
+collections:
+  assignments:
+    output: true
+    permalink: /:collection/:name/
+
+defaults:
+  - scope:
+      type: assignments
+    values:
+      layout: post
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - "*.zip"

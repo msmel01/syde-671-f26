@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  {% if page.math %}
+  <script>window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  {% endif %}
+</head>
+<body>
+  <header class="site">
+    <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <nav><a href="{{ '/' | relative_url }}">All assignments</a></nav>
+  </header>
+  <main>
+    {{ content }}
+  </main>
+  <footer class="site">{{ site.author }} · SYDE 671</footer>
+</body>
+</html>
