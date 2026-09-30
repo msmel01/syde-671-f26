@@ -14,6 +14,12 @@ A Jekyll site for GitHub Pages. Each assignment is one Markdown file.
 {% include figure.html src="/assets/a1/result.jpg" caption="Caption text" %}
 ```
 
+Several images in one figure, with an optional label under each and one shared caption:
+
+```liquid
+{% include figure-row.html srcs="/assets/a1/b.jpg, /assets/a1/g.jpg, /assets/a1/r.jpg" labels="Blue, Green, Red" caption="The three channels after cropping." %}
+```
+
 ```html
 <div class="grid">
   {% include figure.html src="/assets/a1/before.jpg" caption="Before" %}

@@ -1,0 +1,22 @@
+{% comment %}
+  Several images side by side in one figure, with one shared caption.
+  srcs:    image paths separated by commas (required)
+  labels:  short label under each image, separated by commas (optional)
+  title:   heading above the images (optional)
+  caption: caption for the whole figure (optional)
+{% endcomment %}
+{% assign srcs = include.srcs | split: "," %}
+{% assign labels = include.labels | split: "," %}
+<figure class="figure-row">
+  {% if include.title %}<div class="figure-title">{{ include.title }}</div>{% endif %}
+  <div class="figure-row-images">
+    {% for src in srcs %}
+    {% assign label = labels[forloop.index0] | strip %}
+    <div>
+      <img src="{{ src | strip | relative_url }}" alt="{{ label | default: include.caption }}" loading="lazy">
+      {% if label != "" %}<span class="figure-row-label">{{ label }}</span>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% if include.caption %}<figcaption>{{ include.caption }}</figcaption>{% endif %}
+</figure>

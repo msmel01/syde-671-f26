@@ -1,4 +1,5 @@
 <figure>
+  {% if include.title %}<div class="figure-title">{{ include.title }}</div>{% endif %}
   <img src="{{ include.src | relative_url }}" alt="{{ include.alt | default: include.caption }}" loading="lazy">
   {% if include.caption %}<figcaption>{{ include.caption }}</figcaption>{% endif %}
 </figure>
