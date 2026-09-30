@@ -151,3 +151,46 @@ main figure img { cursor: zoom-in; }
   position: absolute; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 0.75rem); transform: translateX(-50%);
   color: rgba(255, 255, 255, 0.7); font: 0.8rem system-ui, sans-serif; white-space: nowrap; pointer-events: none;
 }
+
+/* "Save as PDF" button under the post title (assets/js/print.js) */
+.print-btn {
+  font: 0.85rem system-ui, sans-serif; color: var(--text); background: var(--code-bg);
+  border: 1px solid var(--border); border-radius: 6px; padding: 0.35rem 0.8rem; cursor: pointer;
+}
+.print-btn:hover { border-color: var(--accent); }
+.print-btn:disabled { opacity: 0.6; cursor: default; }
+
+/* Print / PDF layout */
+@media print {
+  /* Always print the light palette, even when the reader uses dark mode */
+  :root, :root:not([data-theme="light"]) {
+    --bg: #fff; --text: #111; --muted: #555; --accent: #1a4f8b; --border: #ccc; --code-bg: #f3f3f3; --card-bg: #fff;
+    --bold-border: 2px solid #111;
+    color-scheme: light;
+  }
+  /* Top/bottom margins come from @page. Side margins are body padding, so they survive
+     browsers that ignore @page (Safari) and a print dialog set to Margins: None. */
+  @page { margin: 1.6cm 0; }
+  body { font-size: 11pt; padding: 0 1.6cm; background: #fff; }
+  main, header.site, footer.site { max-width: none; }
+  header.site, footer.site, .print-btn, .zoom-overlay { display: none !important; }
+  h1 { margin-top: 0; }
+  h1, h2, h3 { break-after: avoid; }
+  figure, table, pre, .callout { break-inside: avoid; }
+  /* Smaller images so several figures fit per page */
+  figure { margin: 0.8rem 0; }
+  main figure img { width: auto; max-width: 100%; max-height: 8cm; margin: 0 auto; }
+  .figure-row-images img { width: auto; max-height: 5.5cm; }
+  .figure-row-images > div { flex: 0 1 auto; display: flex; flex-direction: column; align-items: center; }
+  /* Keep each figure on the same page as the table right after it */
+  .print-keep { break-inside: avoid; }
+  .print-keep > figure { margin-bottom: 0.3rem; }
+  table { margin: 0 auto 0.8rem; font-size: 9pt; }
+  th, td { padding: 0.2rem 0.6rem; }
+  /* Blank spacer lines between figures (marked by print.js) */
+  .print-spacer { display: none; }
+  main figure img { cursor: auto; }
+  a { color: var(--text); text-decoration: none; }
+  /* Keep backgrounds such as the contents box and code blocks */
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
